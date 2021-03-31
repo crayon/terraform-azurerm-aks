@@ -1,0 +1,26 @@
+name: test
+
+on:
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - '**.md'
+  pull_request:
+    paths-ignore:
+    - '**.md'
+
+jobs:
+  tflint:
+    runs-on: ubuntu-latest
+    container: wata727/tflint
+    steps:
+    - uses: actions/checkout@v2
+    - run: tflint
+
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
+    - run: terraform fmt -check -recursive

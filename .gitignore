@@ -1,6 +1,8 @@
 # Local .terraform directories
 **/.terraform/*
 
+*.lock.hcl
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
@@ -13,6 +15,7 @@ crash.log
 # version control.
 #
 # example.tfvars
+terraform.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
