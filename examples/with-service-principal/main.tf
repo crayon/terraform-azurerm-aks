@@ -1,6 +1,6 @@
 module "kubernetes" {
-  source  = "roberthstrand/kubernetes/azurerm"
-  version = "1.2.0"
+  source  = "crayon/aks/azurerm"
+  version = "1.0.0"
 
   name           = "demo"
   resource_group = azurerm_resource_group.cluster.name

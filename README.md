@@ -1,7 +1,7 @@
 # Terraform module for Azure Kubernetes Service
 A flexible module for deploying AKS clusters. The main purpose for this module, besides being the basis for doing talks about Terraform, is to enable users to deploy clusters that adhere to industry standards but that is flexible enough so that anyone can use it for whatever type of deployment.
 
-[![test](https://github.com/roberthstrand/terraform-azurerm-kubernetes/workflows/test/badge.svg?branch=main)](https://github.com/roberthstrand/terraform-azurerm-kubernetes/actions?query=workflow%3Atest)
+[![test](https://github.com/crayon/terraform-azurerm-aks/workflows/test/badge.svg?branch=main)](https://github.com/crayon/terraform-azurerm-aks/actions?query=workflow%3Atest)
 
 ## Requirements
 
@@ -13,7 +13,7 @@ A flexible module for deploying AKS clusters. The main purpose for this module, 
 ### admin_groups needed
 By default the module deploys the cluster as managed, with RBAC. This means that you will have to define what group(s) that will have administrator access to the cluster. This is done through the input variable `admin_groups`, which expects a list of object IDs. You could copy the IDs from the portal and set it explicit, but I like using the data source `azuread_groups` as it returns object IDs of one or more group based on names.
 
-Example using `azuread_groups` can be found [here](https://github.com/roberthstrand/terraform-azurerm-kubernetes/examples/defaults), psuedo code below.
+Example using `azuread_groups` can be found [here](https://github.com/crayon/terraform-azurerm-aks/examples/defaults), pseudo code below.
 
 ```hcl
 data "azuread_groups" "admins" {
@@ -21,7 +21,7 @@ data "azuread_groups" "admins" {
 }
 
 module "kubernetes" {
-  source  = "roberthstrand/kubernetes/azurerm"
+  source  = "crayon/aks/azurerm"
   version = "1.0.0"
 
   admin_groups = data.azuread_groups.admins.object_ids
