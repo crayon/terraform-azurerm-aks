@@ -14,3 +14,7 @@ module "kubernetes" {
 
   depends_on = [azurerm_resource_group.cluster]
 }
+
+output "azaks" {
+  value = module.kubernetes.aks_credentials
+}
