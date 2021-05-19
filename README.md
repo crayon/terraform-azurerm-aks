@@ -7,7 +7,7 @@ A flexible module for deploying AKS clusters. The main purpose for this module, 
 
 | Provider | Minimum version | Note
 | -------- | --------------- | ---- |
-| azurerm | 2.49.0 | Still requires the features field. Read the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage) if in doubt. |
+| azurerm | 2.59.0 | Still requires the features field. Read the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage) if in doubt. |
 | kubernetes | 1.13.3 | See the [Kubernetes provider](#kubernetes-provider) section. |
 
 ### admin_groups needed
