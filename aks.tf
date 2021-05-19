@@ -53,23 +53,23 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   default_node_pool {
-    name                  = var.default_node_pool[0].name
+    name                  = var.default_node_pool.name
     vnet_subnet_id        = var.subnet_id
     enable_node_public_ip = var.enable_node_public_ip
-    vm_size               = var.default_node_pool[0].vm_size
-    node_count            = var.default_node_pool[0].node_count
+    vm_size               = var.default_node_pool.vm_size
+    node_count            = var.default_node_pool.node_count
 
-    enable_auto_scaling = var.default_node_pool[0].enable_auto_scaling
-    min_count           = var.default_node_pool[0].min_count
-    max_count           = var.default_node_pool[0].max_count
+    enable_auto_scaling = var.default_node_pool.enable_auto_scaling
+    min_count           = var.default_node_pool.min_count
+    max_count           = var.default_node_pool.max_count
     availability_zones  = var.availability_zones
 
     # Various additional settings
-    only_critical_addons_enabled = lookup(var.default_node_pool[0].additional_settings, "only_critical_addons_enabled", null)
-    max_pods                     = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
-    os_disk_size_gb              = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
-    os_disk_type                 = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
-    type                         = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
+    only_critical_addons_enabled = lookup(var.default_node_pool.additional_settings, "only_critical_addons_enabled", null)
+    max_pods                     = lookup(var.default_node_pool.additional_settings, "max_pods", null)
+    os_disk_size_gb              = lookup(var.default_node_pool.additional_settings, "os_disk_size_gb", null)
+    os_disk_type                 = lookup(var.default_node_pool.additional_settings, "os_disk_type", null)
+    type                         = lookup(var.default_node_pool.additional_settings, "type", "VirtualMachineScaleSets")
   }
 
   # One of either identity or service_principal blocks must be specified.

@@ -148,7 +148,7 @@ variable "windows_profile" {
 }
 variable "default_node_pool" {
   description = "The default node pool, defaults to a pool with one node of the Standard_D2s_v3 VM Size."
-  type = list(object({
+  type = object({
     name                = string
     vm_size             = string
     node_count          = number
@@ -156,18 +156,16 @@ variable "default_node_pool" {
     min_count           = number
     max_count           = number
     additional_settings = map(string)
-  }))
-  default = [
-    {
-      name                = "default"
-      vm_size             = "Standard_D2s_v3"
-      node_count          = 1
-      enable_auto_scaling = false
-      min_count           = null
-      max_count           = null
-      additional_settings = {}
-    }
-  ]
+  })
+  default = {
+    name                = "default"
+    vm_size             = "Standard_D2s_v3"
+    node_count          = 1
+    enable_auto_scaling = false
+    min_count           = null
+    max_count           = null
+    additional_settings = {}
+  }
 }
 variable "additional_node_pools" {
   type = list(object({
