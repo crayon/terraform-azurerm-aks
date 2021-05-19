@@ -2,7 +2,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # General configurations:
   # Location is set to the variable if specified,
   # otherwise it is set to the location of the resource group.
-  name                = format("%s-aks", var.name)
+  name                = var.name
   location            = data.azurerm_resource_group.aks.location
   resource_group_name = var.resource_group
   sku_tier            = var.sku_tier
