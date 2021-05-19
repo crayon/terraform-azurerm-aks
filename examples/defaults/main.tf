@@ -1,6 +1,7 @@
 module "kubernetes" {
-  source  = "crayon/aks/azurerm"
-  version = "1.0.0"
+  source = "../../"
+  # source  = "crayon/aks/azurerm"
+  # version = "1.0.0"
 
   name           = "demo"
   resource_group = azurerm_resource_group.cluster.name
@@ -12,4 +13,8 @@ module "kubernetes" {
   admin_groups = data.azuread_groups.admins.object_ids
 
   depends_on = [azurerm_resource_group.cluster]
+}
+
+output "azaks" {
+  value = module.kubernetes.aks_credentials
 }
