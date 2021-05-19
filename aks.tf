@@ -85,8 +85,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dynamic "service_principal" {
     for_each = var.service_principal != null ? ["ServicePrincipal"] : []
     content {
-      client_id     = lookup(var.service_principal, "client_id", null)
-      client_secret = lookup(var.service_principal, "client_secret", null)
+      client_id     = var.service_principal.client_id
+      client_secret = var.service_principal.client_secret
     }
   }
 

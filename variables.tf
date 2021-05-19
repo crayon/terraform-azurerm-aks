@@ -126,7 +126,10 @@ variable "rbac_server_app_secret" {
   description = "The Server Secret of an Azure Active Directory Application."
 }
 variable "service_principal" {
-  type        = map(string)
+  type = object({
+    client_id     = string
+    client_secret = string
+  })
   default     = null
   description = "Map used to set the service principal client ID and secret."
 }
