@@ -38,7 +38,7 @@ variable "kubernetes_version" {
 variable "kubernetes_version_prefix" {
   type        = string
   description = "Set a prefix for the Kubernetes version. Example: 1.17 uses the latest version of 1.17."
-  default     = "1.19"
+  default     = "1.20"
 }
 variable "kubernetes_include_preview" {
   type        = bool
@@ -126,12 +126,12 @@ variable "rbac_server_app_secret" {
   description = "The Server Secret of an Azure Active Directory Application."
 }
 variable "service_principal" {
+  description = "Map used to set the service principal client ID and secret."
   type = object({
     client_id     = string
     client_secret = string
   })
-  default     = null
-  description = "Map used to set the service principal client ID and secret."
+  default = null
 }
 variable "linux_profile" {
   description = "The Linux profile for the cluster"
