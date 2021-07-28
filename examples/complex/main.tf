@@ -1,14 +1,18 @@
 module "kubernetes" {
-  source  = "crayon/aks/azurerm"
-  version = "1.2.0"
+  # source  = "crayon/aks/azurerm"
+  # version = "1.2.0"
+
+  source = "../../"
 
   name           = "demo"
   resource_group = azurerm_resource_group.cluster.name
   subnet_id      = azurerm_subnet.aks.id
   admin_groups   = data.azuread_groups.admins.object_ids
 
+  ingress_application_gateway_id = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/aks-rg/providers/Microsoft.Network/applicationGateways/appgwname"
+
   # How to define a default pool, here with auto scaling enabled.
-  default_node_pool = [{
+  default_node_pool = {
     name                = "default"
     vm_size             = "Standard_D2s_v3"
     node_count          = null
@@ -19,7 +23,7 @@ module "kubernetes" {
       max_pods        = 50
       os_disk_size_gb = 60
     }
-  }]
+  }
 
   # Adding additional pools
   additional_node_pools = [

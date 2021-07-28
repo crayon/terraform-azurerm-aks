@@ -65,13 +65,10 @@ variable "addons" {
     azure_policy   = true
   }
 }
-variable "ingress_application_gateway" {
+variable "ingress_application_gateway_id" {
   description = "For adding AGIC to the cluster. Adding this block enables the Ingress controller, make sure you don't only have node pools with 'only_critical_addons_enabled' as AGIC will fail to deploy. For now, we only support defining existing Application Gateways."
-  type = object({
-    gateway_id = string
-    subnet_id  = string
-  })
-  default = null
+  type        = string
+  default     = null
 }
 variable "network_plugin" {
   type        = string
