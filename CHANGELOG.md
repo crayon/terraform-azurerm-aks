@@ -13,6 +13,7 @@ New minimum version requirement for the module is now:
 
 ### Miscellaneous
 - Bump example code version to 1.2.0
+- Added AGIC to the complex example
 
 ## v1.1.0
 New minimum version requirement for the module is now:

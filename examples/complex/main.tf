@@ -1,14 +1,14 @@
 module "kubernetes" {
-  # source  = "crayon/aks/azurerm"
-  # version = "1.2.0"
-
-  source = "../../"
+  source  = "crayon/aks/azurerm"
+  version = "1.2.0"
 
   name           = "demo"
   resource_group = azurerm_resource_group.cluster.name
   subnet_id      = azurerm_subnet.aks.id
   admin_groups   = data.azuread_groups.admins.object_ids
 
+  # If AGIC is to be enabled, add the
+  # Application Gateway ID like this.
   ingress_application_gateway_id = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/aks-rg/providers/Microsoft.Network/applicationGateways/appgwname"
 
   # How to define a default pool, here with auto scaling enabled.
@@ -34,7 +34,7 @@ module "kubernetes" {
       enable_auto_scaling = false
       min_count           = null
       max_count           = null
-      node_taints         = []
+      node_taints         = null
       node_labels = {
         "type" = "burstable"
       }
