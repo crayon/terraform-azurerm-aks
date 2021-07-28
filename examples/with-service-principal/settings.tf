@@ -1,13 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      version = "=2.40.0"
-    }
-    azuread = {
-      version = "=1.3.0"
-    }
-  }
-}
 provider "azurerm" {
   features {}
 }

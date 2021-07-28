@@ -2,12 +2,13 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # General configurations:
   # Location is set to the variable if specified,
   # otherwise it is set to the location of the resource group.
-  name                = var.name
-  location            = data.azurerm_resource_group.aks.location
-  resource_group_name = var.resource_group
-  sku_tier            = var.sku_tier
-  dns_prefix          = var.name
-  tags                = var.tags
+  name                            = var.name
+  location                        = data.azurerm_resource_group.aks.location
+  resource_group_name             = var.resource_group
+  sku_tier                        = var.sku_tier
+  dns_prefix                      = var.name
+  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  tags                            = var.tags
 
   # If no Kubernetes version is set, it uses the latest non-preview version.
   # Can be set to use the latest preview version, and one can define a prefix to make
@@ -26,6 +27,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     oms_agent {
       enabled                    = var.addons.oms_agent
       log_analytics_workspace_id = var.addons.oms_agent ? var.addons.workspace_id : null
+    }
+
+    ingress_application_gateway {
+      enabled    = var.ingress_application_gateway_id != null ? true : false
+      gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
     }
   }
 

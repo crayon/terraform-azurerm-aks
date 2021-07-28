@@ -25,6 +25,11 @@ variable "enable_node_public_ip" {
   description = "Should nodes in this Node Pool have a Public IP Address?"
   default     = false
 }
+variable "api_server_authorized_ip_ranges" {
+  type        = list(string)
+  description = "List of IP ranges that can access the Kubernetes API. Defaults is open from every source."
+  default     = null
+}
 variable "availability_zones" {
   type        = list(string)
   description = "A list of availability zones that the cluster will use. Defaults to 1, 2 and 3."
@@ -59,6 +64,11 @@ variable "addons" {
     workspace_id   = null
     azure_policy   = true
   }
+}
+variable "ingress_application_gateway_id" {
+  description = "For adding AGIC to the cluster. Adding this block enables the Ingress controller, make sure you don't only have node pools with 'only_critical_addons_enabled' as AGIC will fail to deploy. For now, we only support defining existing Application Gateways."
+  type        = string
+  default     = null
 }
 variable "network_plugin" {
   type        = string
