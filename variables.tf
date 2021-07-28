@@ -25,6 +25,11 @@ variable "enable_node_public_ip" {
   description = "Should nodes in this Node Pool have a Public IP Address?"
   default     = false
 }
+variable "api_server_authorized_ip_ranges" {
+  type        = list(string)
+  description = "List of IP ranges that can access the Kubernetes API. Defaults is open from every source."
+  default     = null
+}
 variable "availability_zones" {
   type        = list(string)
   description = "A list of availability zones that the cluster will use. Defaults to 1, 2 and 3."
