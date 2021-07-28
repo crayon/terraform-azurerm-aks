@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.2.0
+New minimum version requirement for the module is now:
+* Terraform 1.0.3
+* azurerm 2.69.0
+* azuread 1.6.0
+* kubernetes 2.3.2
+
+### Issues closed
+- Implement IP restriction to Kubernetes API (#7)
+- Add AGIC addon (#8)
+
+### Miscellaneous
+- Bump example code version to 1.2.0
+
 ## v1.1.0
 New minimum version requirement for the module is now:
 * Terraform 0.15.3

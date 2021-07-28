@@ -5,10 +5,15 @@ A flexible module for deploying AKS clusters. The main purpose for this module, 
 
 ## Requirements
 
+Current Terraform minimum version required is `1.0.3`.
+
+If not pinned by you, the provider downloaded will be the newest version available above the minimum version. It's considered good practice to pin your versions to make sure that you get consistent results.
+
 | Provider | Minimum version | Note
 | -------- | --------------- | ---- |
-| azurerm | 2.59.0 | Still requires the features field. Read the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage) if in doubt. |
-| kubernetes | 1.13.3 | See the [Kubernetes provider](#kubernetes-provider) section. |
+| azurerm | 2.69.0 | Still requires the features field. Read the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#example-usage) if in doubt. |
+| azuread | 1.6.0 | |
+| kubernetes | 2.3.2 | See the [Kubernetes provider](#kubernetes-provider) section. |
 
 ### admin_groups needed
 By default the module deploys the cluster as managed, with RBAC. This means that you will have to define what group(s) that will have administrator access to the cluster. This is done through the input variable `admin_groups`, which expects a list of object IDs. You could copy the IDs from the portal and set it explicit, but I like using the data source `azuread_groups` as it returns object IDs of one or more group based on names.
