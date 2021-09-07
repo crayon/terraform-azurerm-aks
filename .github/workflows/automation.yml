@@ -1,0 +1,20 @@
+name: Automation
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  projectassignment:
+    runs-on: ubuntu-latest
+    name: Add to Terraform project
+    steps:
+    - name: If opened, add to project
+      uses: srggrs/assign-one-project-github-action@1.2.1
+      if: github.event.action == 'opened'
+      with:
+        project: 'https://github.com/orgs/crayon/projects/2'
