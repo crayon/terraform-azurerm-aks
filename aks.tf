@@ -6,7 +6,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   location                        = data.azurerm_resource_group.aks.location
   resource_group_name             = var.resource_group
   sku_tier                        = var.sku_tier
-  dns_prefix                      = var.name
+  dns_prefix                      = var.dns_prefix
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   tags                            = var.tags
 

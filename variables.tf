@@ -8,8 +8,13 @@ variable "resource_group" {
 }
 variable "sku_tier" {
   type        = string
-  default     = "Free"
   description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free."
+  default     = "Free"
+}
+variable "dns_prefix" {
+  type        = string
+  description = "(Optional) DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created."
+  default     = null
 }
 variable "subnet_id" {
   type        = string

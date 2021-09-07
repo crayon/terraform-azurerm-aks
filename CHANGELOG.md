@@ -2,6 +2,10 @@
 
 ## v1.3.0
 
+>Note: Release-drafter have been added from this version on, and might look a bit different than what is described in this changelog. At least, for now.
+
+* Add `dns_prefix` variable (#10)
+
 ## v1.2.0
 
 New minimum version requirement for the module is now:
