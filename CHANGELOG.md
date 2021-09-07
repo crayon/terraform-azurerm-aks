@@ -2,6 +2,17 @@
 
 ## v1.3.0
 
+>Note: Release-drafter have been added from this version on, and might look a bit different than what is described in this changelog. At least, for now.
+
+### Issues closed
+
+* Add `dns_prefix` variable (#10)
+
+### Miscellaneous
+
+* Added Release-drafter to the repository
+* New workflow, issues and PR will get automatically added to the [Terraform Modules project](https://github.com/orgs/crayon/projects/2)
+
 ## v1.2.0
 
 New minimum version requirement for the module is now:
