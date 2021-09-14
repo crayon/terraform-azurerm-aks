@@ -1,12 +1,11 @@
 resource "azurerm_kubernetes_cluster" "cluster" {
   # General configurations:
-  # Location is set to the variable if specified,
-  # otherwise it is set to the location of the resource group.
   name                            = var.name
   location                        = data.azurerm_resource_group.aks.location
   resource_group_name             = var.resource_group
+  node_resource_group             = var.node_resource_group
   sku_tier                        = var.sku_tier
-  dns_prefix                      = var.dns_prefix
+  dns_prefix                      = var.dns_prefix != null ? var.dns_prefix : local.default_dns_prefix
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   tags                            = var.tags
 

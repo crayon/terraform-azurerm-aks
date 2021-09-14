@@ -6,6 +6,11 @@ variable "resource_group" {
   type        = string
   description = "The resource group you want your deployment in."
 }
+variable "node_resource_group" {
+  type        = string
+  description = "(Optional) The name of the Resource Group where the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
+  default     = null
+}
 variable "sku_tier" {
   type        = string
   description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free."
