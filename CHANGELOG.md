@@ -2,7 +2,11 @@
 
 ## v1.3.0
 
->Note: Release-drafter have been added from this version on, and might look a bit different than what is described in this changelog. At least, for now.
+>Note: Release-drafter have been added from this version on, and might look a bit different than what is described in this changelog. At least, for now, still exploring the best way of handling changelogs.
+
+### Issues closed
+
+* Add node_resource_group (#11)
 
 ### Issues closed
 
