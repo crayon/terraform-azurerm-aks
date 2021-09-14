@@ -6,11 +6,10 @@
 
 ### Issues closed
 
-* Add node_resource_group (#11)
-
-### Issues closed
-
 * Add `dns_prefix` variable (#10)
+* Add node_resource_group (#11)
+* Fails plan when variable dns_prefix is not set (#16)
+* Add support for AKS RBAC (#15)
 
 ### Miscellaneous
 

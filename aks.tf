@@ -49,6 +49,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     azure_active_directory {
       managed                = var.azure_ad_managed
       admin_group_object_ids = var.azure_ad_managed ? var.admin_groups : null
+      azure_rbac_enabled     = var.azure_rbac_enabled
 
       # If managed is set to false, then the following properties needs to be set
       client_app_id     = var.azure_ad_managed == false ? var.rbac_client_app_id : null
