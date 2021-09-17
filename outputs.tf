@@ -22,3 +22,7 @@ output "kube_admin_config_raw" {
   description = "The raw kube admin config, used with kubectl and other tools."
   value       = azurerm_kubernetes_cluster.cluster.kube_admin_config_raw
 }
+output "kubelet_identity" {
+  description = "The raw kubelet identity. Used for Azure role assignments."
+  value       = azurerm_kubernetes_cluster.cluster.kubelet_identity
+}
