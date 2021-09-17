@@ -30,5 +30,4 @@ template: |
 
   $CHANGES
   
-  _Thanks to all that contributed:_
-  $CONTRIBUTORS
+  _Thanks to all that contributed!_
