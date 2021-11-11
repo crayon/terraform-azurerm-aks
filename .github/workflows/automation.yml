@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [opened]
 env:
-  MY_GITHUB_TOKEN: ${{ secrets.TEMP_PROJECTAUTOMATION }}
+  MY_GITHUB_TOKEN: ${{ secrets.GHBOT_TOKEN }}
 
 jobs:
   projectassignment:
