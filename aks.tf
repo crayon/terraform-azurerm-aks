@@ -68,6 +68,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     enable_node_public_ip = var.enable_node_public_ip
     vm_size               = var.default_node_pool.vm_size
     node_count            = var.default_node_pool.node_count
+    node_labels           = var.default_node_pool.node_labels
 
     enable_auto_scaling = var.default_node_pool.enable_auto_scaling
     min_count           = var.default_node_pool.min_count

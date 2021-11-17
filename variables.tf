@@ -188,6 +188,7 @@ variable "default_node_pool" {
     enable_auto_scaling = bool
     min_count           = number
     max_count           = number
+    node_labels         = map(string)
     additional_settings = map(string)
   })
   default = {
@@ -197,6 +198,7 @@ variable "default_node_pool" {
     enable_auto_scaling = false
     min_count           = null
     max_count           = null
+    node_labels         = {}
     additional_settings = {}
   }
 }
