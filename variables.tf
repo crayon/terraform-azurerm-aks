@@ -80,6 +80,11 @@ variable "ingress_application_gateway_id" {
   type        = string
   default     = null
 }
+variable "http_application_routing" {
+  description = "(Optional) Enable HTTP application routing."
+  type        = bool
+  default     = false
+}
 variable "network_plugin" {
   type        = string
   description = "Set to kubenet by default, can be either kubenet or azure."

@@ -32,6 +32,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
       enabled    = var.ingress_application_gateway_id != null ? true : false
       gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
     }
+
+    http_application_routing {
+      enabled = var.http_application_routing
+    }
   }
 
   network_profile {
