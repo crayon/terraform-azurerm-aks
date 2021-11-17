@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4.0
+
+- (#21) *Add the kubelet\_identity property to module outputs* by @Happycoil
+- (#23) *Bump azuread from 2.2.1 to 2.3.0* by @dependabot
+- (#22) *Bump azurerm from 2.76.0 to 2.77.0* by @dependabot
+- (#24) *default_node_pool is missing node_labels* by @roberthstrand
+- (#25) *Enable HTTP application routing* by @roberthstrand
+
 ## v1.3.0
 
 >Note: Release-drafter have been added from this version on, and might look a bit different than what is described in this changelog. At least, for now, still exploring the best way of handling changelogs.
