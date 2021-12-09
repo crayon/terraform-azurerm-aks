@@ -1,0 +1,19 @@
+changelog:
+  categories:
+    - title: Breaking Changes
+      labels:
+        - "Type: Breaking Changes"
+    - title: New Features and Enhancements
+      labels:
+        - "Type: Feature"
+        - "Type: Enhancement"
+    - title: Bugs Fixes
+      labels:
+        - "Type: Bug"
+    - title: Chores and maintenance
+      labels:
+        - "Type: Chore"
+        - "Type: Documentation"
+    - title: Other Changes
+      labels:
+        - "*"
