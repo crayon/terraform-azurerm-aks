@@ -1,20 +1,37 @@
 name: Automation
-
 on:
   issues:
     types: [opened]
   pull_request:
-    types: [opened]
-env:
-  MY_GITHUB_TOKEN: ${{ secrets.GHBOT_TOKEN }}
+    types: [opened, reopened, synchronize]
+  schedule:
+  - cron: '0 0 * * *'
 
 jobs:
-  projectassignment:
+  automation:
     runs-on: ubuntu-latest
-    name: Add to Terraform project
+    name: Automation
     steps:
-    - name: If opened, add to project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.action == 'opened'
+    
+    - name: Project automation
+      if: github.event_name == 'issues'
+      uses: crayon/project-github-action@v1.0.0-beta1
       with:
-        project: 'https://github.com/orgs/crayon/projects/2'
+        project_number: 7
+        task_id: ${{ github.event.pull_request.node_id || github.event.issue.node_id }}
+        repo-token: ${{ secrets.GHBOT_TOKEN }}
+        
+    - name: Mark stale issues and pull requests
+      uses: actions/stale@v3
+      if: github.event_name == 'schedule'
+      with:
+        repo-token: ${{ secrets.GHBOT_TOKEN }}
+        stale-issue-message: 'This issue has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs. Thank you for your contributions.'
+        close-issue-message: 'Closed due to inactivity for 7 days since marked as stale. Please ping one of the maintainers once you add more information and updates here.'
+        stale-pr-message: 'This pull request has been automatically marked as stale because it has not had recent activity. It will be closed if no further activity occurs. Thank you for your contributions.'
+        close-pr-message: 'Closed due to inactivity for 7 days since marked as stale. Please ping one of the maintainers once you add more information and updates here.'
+        exempt-issue-labels: 'Type: Pinned,Status: Approved'
+        exempt-pr-labels: 'Type: Pinned,Status: Approved'
+        stale-issue-label: 'Status: Stale'
+        days-before-stale: 30
+        days-before-close: 7
