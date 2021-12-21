@@ -6,9 +6,11 @@ on:
     - main
     paths-ignore:
     - '**.md'
+    - '**.y*ml'
   pull_request:
     paths-ignore:
     - '**.md'
+    - '**.y*ml'
 
 jobs:
   tflint:
