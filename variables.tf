@@ -75,6 +75,24 @@ variable "addons" {
     azure_policy   = true
   }
 }
+variable "azure_keyvault_secrets_provider" {
+  description = "Enable the Key Vault CSI driver."
+  type = object({
+    enabled                  = bool
+    secret_rotation_enabled  = bool
+    secret_rotation_interval = number
+  })
+  default = {
+    enabled                  = false
+    secret_rotation_enabled  = false
+    secret_rotation_interval = null
+  }
+}
+variable "open_service_mesh" {
+  description = "Enables the Open Service Mesh addon"
+  type        = bool
+  default     = false
+}
 variable "ingress_application_gateway_id" {
   description = "For adding AGIC to the cluster. Adding this block enables the Ingress controller, make sure you don't only have node pools with 'only_critical_addons_enabled' as AGIC will fail to deploy. For now, we only support defining existing Application Gateways."
   type        = string
