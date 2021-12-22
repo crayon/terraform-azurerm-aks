@@ -2,5 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "terraform"
     directory: "/"
+    labels:
+      - "Type: Chore"
     schedule:
-      interval: "daily"
+      interval: "weekly"
