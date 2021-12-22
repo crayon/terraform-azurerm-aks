@@ -80,7 +80,7 @@ variable "azure_keyvault_secrets_provider" {
   type = object({
     enabled                  = bool
     secret_rotation_enabled  = bool
-    secret_rotation_interval = number
+    secret_rotation_interval = string
   })
   default = {
     enabled                  = false

@@ -42,8 +42,12 @@ resource "azurerm_kubernetes_cluster" "cluster" {
       secret_rotation_enabled  = var.azure_keyvault_secrets_provider.secret_rotation_enabled
       secret_rotation_interval = var.azure_keyvault_secrets_provider.secret_rotation_interval
     }
-    open_service_mesh {
-      enabled = var.open_service_mesh
+
+    dynamic "open_service_mesh" {
+      for_each = var.open_service_mesh != false ? ["osm"] : []
+      content {
+        enabled = var.open_service_mesh
+      }
     }
   }
 
