@@ -88,6 +88,11 @@ variable "azure_keyvault_secrets_provider" {
     secret_rotation_interval = null
   }
 }
+variable "open_service_mesh" {
+  description = "Enables the Open Service Mesh addon"
+  type        = bool
+  default     = false
+}
 variable "ingress_application_gateway_id" {
   description = "For adding AGIC to the cluster. Adding this block enables the Ingress controller, make sure you don't only have node pools with 'only_critical_addons_enabled' as AGIC will fail to deploy. For now, we only support defining existing Application Gateways."
   type        = string
