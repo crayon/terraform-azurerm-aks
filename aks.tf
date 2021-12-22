@@ -90,6 +90,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     os_disk_size_gb              = lookup(var.default_node_pool.additional_settings, "os_disk_size_gb", null)
     os_disk_type                 = lookup(var.default_node_pool.additional_settings, "os_disk_type", null)
     type                         = lookup(var.default_node_pool.additional_settings, "type", "VirtualMachineScaleSets")
+    orchestrator_version         = lookup(var.default_node_pool.additional_settings, "orchestrator_version", null)
   }
 
   # One of either identity or service_principal blocks must be specified.
@@ -153,4 +154,5 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
   os_type               = lookup(each.value.additional_settings, "os_type", "Linux")
   os_disk_size_gb       = lookup(each.value.additional_settings, "os_disk_size_gb", null)
   os_disk_type          = lookup(each.value.additional_settings, "os_disk_type", null)
+  orchestrator_version  = lookup(each.value.additional_settings, "orchestrator_version", null)
 }
