@@ -36,6 +36,12 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     http_application_routing {
       enabled = var.http_application_routing
     }
+
+    azure_keyvault_secrets_provider {
+      enabled                  = var.azure_keyvault_secrets_provider.enabled
+      secret_rotation_enabled  = var.azure_keyvault_secrets_provider.secret_rotation_enabled
+      secret_rotation_interval = var.azure_keyvault_secrets_provider.secret_rotation_interval
+    }
   }
 
   network_profile {
