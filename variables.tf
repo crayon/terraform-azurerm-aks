@@ -245,3 +245,21 @@ variable "namespaces" {
   description = "A list of namespaces you want deployed."
   default     = []
 }
+
+variable "private_cluster_enabled" {
+  type        = bool
+  description = "(Optional) Should this Kubernetes Cluster have its API server only exposed on internal IP addresses? This provides a Private IP Address for the Kubernetes API on the Virtual Network where the Kubernetes Cluster is located. Defaults to false. Changing this forces a new resource to be created."
+  default     = false
+}
+
+variable "private_dns_zone_id" {
+  type        = string
+  description = "(Optional) Either the ID of Private DNS Zone which should be delegated to this Cluster, System to have AKS manage this or None. In case of None you will need to bring your own DNS server and set up resolving, otherwise cluster will have issues after provisioning. Changing this forces a new resource to be created."
+  default     = null
+}
+
+variable "private_cluster_public_fqdn_enabled" {
+  type        = bool
+  description = "(Optional) Specifies whether a Public FQDN for this Private Cluster should be added. Defaults to false."
+  default     = false
+}
