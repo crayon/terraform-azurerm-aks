@@ -9,10 +9,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   tags                            = var.tags
 
-  private_cluster_enabled             = var.private_cluster_enabled
-  private_dns_zone_id                 = var.private_dns_zone_id
-  private_cluster_public_fqdn_enabled = var.private_cluster_public_fqdn_enabled
-
   # If no Kubernetes version is set, it uses the latest non-preview version.
   # Can be set to use the latest preview version, and one can define a prefix to make
   # the versions kept at a certain major version.
@@ -105,9 +101,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # We can control which by using dynamic blocks.
   ## If a Service Principal is not present
   dynamic "identity" {
-    for_each = var.service_principal == null ? ["SystemAssigned"] : []
+    for_each = var.service_principal == null ? ["noSP"] : []
     content {
-      type = "SystemAssigned"
+      type                      = var.user_assigned_identity_id != null ? "UserAssigned" : "SystemAssigned"
+      user_assigned_identity_id = var.user_assigned_identity_id
     }
   }
   ## If a Service Principal is present

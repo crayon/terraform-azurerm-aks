@@ -263,3 +263,9 @@ variable "private_cluster_public_fqdn_enabled" {
   description = "(Optional) Specifies whether a Public FQDN for this Private Cluster should be added. Defaults to false."
   default     = false
 }
+
+variable "user_assigned_identity_id" {
+  type        = string
+  description = "(Optional) Set the identity type to UserAssigned and set the ID."
+  default     = null
+}
