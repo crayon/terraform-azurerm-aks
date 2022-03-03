@@ -105,9 +105,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # We can control which by using dynamic blocks.
   ## If a Service Principal is not present
   dynamic "identity" {
-    for_each = var.service_principal == null ? ["SystemAssigned"] : []
+    for_each = var.service_principal == null ? ["noSP"] : []
     content {
-      type = "SystemAssigned"
+      type                      = var.user_assigned_identity_id != null ? "UserAssigned" : "SystemAssigned"
+      user_assigned_identity_id = var.user_assigned_identity_id
     }
   }
   ## If a Service Principal is present
