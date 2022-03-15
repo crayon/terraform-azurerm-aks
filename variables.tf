@@ -2,10 +2,17 @@ variable "name" {
   type        = string
   description = "Name the deployment."
 }
+
 variable "resource_group" {
   type        = string
   description = "The resource group you want your deployment in."
 }
+
+variable "location" {
+  type        = string
+  description = "The location you want your resources deployed to."
+}
+
 variable "node_resource_group" {
   type        = string
   description = "(Optional) The name of the Resource Group where the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
