@@ -2,7 +2,7 @@ terraform {
   required_version = ">=1.0.3"
   required_providers {
     azurerm = {
-      version = "2.98.0"
+      version = "3.0.2"
     }
     azuread = {
       version = "2.18.0"
