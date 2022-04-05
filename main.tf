@@ -5,7 +5,7 @@ terraform {
       version = "3.0.2"
     }
     azuread = {
-      version = "2.18.0"
+      version = "2.19.1"
     }
     kubernetes = {
       source  = "kubernetes"
