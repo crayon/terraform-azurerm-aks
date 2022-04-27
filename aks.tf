@@ -154,7 +154,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
 
   node_labels = each.value.node_labels
   node_taints = each.value.node_taints != null ? each.value.node_taints : [""]
-  tags        = each.value.tags
+  tags        = var.tags
 
   # Various additional settings
   enable_node_public_ip = lookup(each.value.additional_settings, "enable_node_public_ip", false)
