@@ -237,7 +237,6 @@ variable "additional_node_pools" {
     max_count           = number
     node_labels         = map(string)
     node_taints         = list(string)
-    tags                = map(string)
     additional_settings = map(string)
   }))
   description = "A list of additional node pools that you want to deploy with the cluster."
