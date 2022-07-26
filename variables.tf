@@ -140,7 +140,7 @@ variable "docker_bridge_cidr" {
   description = "CIDR used as the Docker bridge IP address on nodes."
   default     = "172.17.0.1/16"
 }
-variable "role_based_access_control" {
+variable "role_based_access_control_enabled" {
   type        = bool
   description = "Whether or not RBAC is enabled on the cluster."
   default     = true
