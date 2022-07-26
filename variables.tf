@@ -265,8 +265,8 @@ variable "private_cluster_public_fqdn_enabled" {
   default     = false
 }
 
-variable "user_assigned_identity_id" {
-  type        = string
-  description = "(Optional) Set the identity type to UserAssigned and set the ID."
+variable "identity_id" {
+  type        = list(string)
+  description = "(Optional) A list of identities to use with UserAssigned identity."
   default     = null
 }
