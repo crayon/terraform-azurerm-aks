@@ -130,7 +130,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
   vnet_subnet_id        = var.subnet_id
-  availability_zones    = var.availability_zones
+  zones                 = var.zones
 
   enable_auto_scaling = each.value.enable_auto_scaling
   min_count           = each.value.min_count
