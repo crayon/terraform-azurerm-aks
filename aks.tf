@@ -18,9 +18,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # the versions kept at a certain major version.
   kubernetes_version = var.kubernetes_version == "not_set" ? data.azurerm_kubernetes_service_versions.current.latest_version : var.kubernetes_version
 
-  azure_policy {
-    enabled = var.addons.azure_policy
-  }
+  azure_policy_enabled = var.azure_policy_enabled
 
   oms_agent {
     log_analytics_workspace_id = var.oms_agent_log_analytics_workspace_id

@@ -67,16 +67,10 @@ variable "kubernetes_include_preview" {
   description = "Include versions of Kubernetes that are released as 'preview'. Defaults to false."
   default     = false
 }
-variable "addons" {
-  description = "The addon profile for the cluster"
-  type = object({
-    kube_dashboard = bool
-    azure_policy   = bool
-  })
-  default = {
-    kube_dashboard = false
-    azure_policy   = true
-  }
+variable "azure_policy_enabled" {
+  description = "(Optional) Enable if you want the cluster to work with Azure Policy."
+  type        = bool
+  default     = false
 }
 variable "oms_agent_log_analytics_workspace_id" {
   description = "Set the log analytics workspace ID you want to send your OMS Agent data to."
