@@ -18,40 +18,39 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # the versions kept at a certain major version.
   kubernetes_version = var.kubernetes_version == "not_set" ? data.azurerm_kubernetes_service_versions.current.latest_version : var.kubernetes_version
 
-  addon_profile {
-    kube_dashboard {
-      enabled = var.addons.kube_dashboard
-    }
+  kube_dashboard {
+    enabled = var.addons.kube_dashboard
+  }
 
-    azure_policy {
-      enabled = var.addons.azure_policy
-    }
+  azure_policy {
+    enabled = var.addons.azure_policy
+  }
 
-    oms_agent {
-      enabled                    = var.addons.oms_agent
-      log_analytics_workspace_id = var.addons.oms_agent ? var.addons.workspace_id : null
-    }
+  oms_agent {
+    enabled                    = var.addons.oms_agent
+    log_analytics_workspace_id = var.addons.oms_agent ? var.addons.workspace_id : null
+  }
 
-    ingress_application_gateway {
-      enabled    = var.ingress_application_gateway_id != null ? true : false
-      gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
-    }
+  ingress_application_gateway {
+    gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
+  }
 
-    http_application_routing {
-      enabled = var.http_application_routing
-    }
+  http_application_routing {
+    enabled = var.http_application_routing
+  }
 
-    azure_keyvault_secrets_provider {
-      enabled                  = var.azure_keyvault_secrets_provider.enabled
-      secret_rotation_enabled  = var.azure_keyvault_secrets_provider.secret_rotation_enabled
-      secret_rotation_interval = var.azure_keyvault_secrets_provider.secret_rotation_interval
+  dynamic "key_vault_secrets_provider" {
+    for_each = var.key_vault_secrets_provider.secret_rotation_enabled != null ? ["csi"] : []
+    content {
+      secret_rotation_enabled  = var.key_vault_secrets_provider.secret_rotation_enabled
+      secret_rotation_interval = var.key_vault_secrets_provider.secret_rotation_interval
     }
+  }
 
-    dynamic "open_service_mesh" {
-      for_each = var.open_service_mesh != false ? ["osm"] : []
-      content {
-        enabled = var.open_service_mesh
-      }
+  dynamic "open_service_mesh" {
+    for_each = var.open_service_mesh != false ? ["osm"] : []
+    content {
+      enabled = var.open_service_mesh
     }
   }
 
