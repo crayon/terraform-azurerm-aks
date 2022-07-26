@@ -27,8 +27,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     }
   }
 
-  ingress_application_gateway {
-    gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
+  dynamic "ingress_application_gateway" {
+    for_each = var.ingress_application_gateway_id != null ? ["ingress_app_gw"] : []
+    content {
+      gateway_id = var.ingress_application_gateway_id
+    }
   }
 
   http_application_routing_enabled = var.http_application_routing_enabled
