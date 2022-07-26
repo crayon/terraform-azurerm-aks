@@ -91,8 +91,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dynamic "identity" {
     for_each = var.service_principal == null ? ["noSP"] : []
     content {
-      type         = var.user_assigned_identity_id != null ? "UserAssigned" : "SystemAssigned"
-      identity_ids = var.user_assigned_identity_id
+      type         = var.identity_id != null ? "UserAssigned" : "SystemAssigned"
+      identity_ids = var.identity_id
     }
   }
   ## If a Service Principal is present
