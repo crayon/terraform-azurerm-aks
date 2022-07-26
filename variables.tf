@@ -47,7 +47,7 @@ variable "api_server_authorized_ip_ranges" {
   description = "List of IP ranges that can access the Kubernetes API. Defaults is open from every source."
   default     = null
 }
-variable "availability_zones" {
+variable "zones" {
   type        = list(string)
   description = "A list of availability zones that the cluster will use. Defaults to 1, 2 and 3."
   default     = ["1", "2", "3"]

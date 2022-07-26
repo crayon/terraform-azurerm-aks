@@ -85,7 +85,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     enable_auto_scaling = var.default_node_pool.enable_auto_scaling
     min_count           = var.default_node_pool.min_count
     max_count           = var.default_node_pool.max_count
-    availability_zones  = var.availability_zones
+    zones               = var.zones
 
     # Various additional settings
     only_critical_addons_enabled = lookup(var.default_node_pool.additional_settings, "only_critical_addons_enabled", null)
