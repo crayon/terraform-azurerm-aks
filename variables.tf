@@ -47,7 +47,7 @@ variable "api_server_authorized_ip_ranges" {
   description = "List of IP ranges that can access the Kubernetes API. Defaults is open from every source."
   default     = null
 }
-variable "availability_zones" {
+variable "zones" {
   type        = list(string)
   description = "A list of availability zones that the cluster will use. Defaults to 1, 2 and 3."
   default     = ["1", "2", "3"]
@@ -67,36 +67,29 @@ variable "kubernetes_include_preview" {
   description = "Include versions of Kubernetes that are released as 'preview'. Defaults to false."
   default     = false
 }
-variable "addons" {
-  description = "The addon profile for the cluster"
-  type = object({
-    kube_dashboard = bool
-    oms_agent      = bool
-    workspace_id   = string
-    azure_policy   = bool
-  })
-  default = {
-    kube_dashboard = false
-    oms_agent      = false
-    workspace_id   = null
-    azure_policy   = true
-  }
+variable "azure_policy_enabled" {
+  description = "(Optional) Enable if you want the cluster to work with Azure Policy."
+  type        = bool
+  default     = false
 }
-variable "azure_keyvault_secrets_provider" {
+variable "oms_agent_log_analytics_workspace_id" {
+  description = "Set the log analytics workspace ID you want to send your OMS Agent data to."
+  type        = string
+  default     = null
+}
+variable "key_vault_secrets_provider" {
   description = "Enable the Key Vault CSI driver."
   type = object({
-    enabled                  = bool
     secret_rotation_enabled  = bool
     secret_rotation_interval = string
   })
-  default = {
-    enabled                  = false
+  default = ({
     secret_rotation_enabled  = false
     secret_rotation_interval = null
-  }
+  })
 }
-variable "open_service_mesh" {
-  description = "Enables the Open Service Mesh addon"
+variable "open_service_mesh_enabled" {
+  description = "(Optional) Enables the Open Service Mesh addon."
   type        = bool
   default     = false
 }
@@ -105,7 +98,7 @@ variable "ingress_application_gateway_id" {
   type        = string
   default     = null
 }
-variable "http_application_routing" {
+variable "http_application_routing_enabled" {
   description = "(Optional) Enable HTTP application routing."
   type        = bool
   default     = false
@@ -145,7 +138,7 @@ variable "docker_bridge_cidr" {
   description = "CIDR used as the Docker bridge IP address on nodes."
   default     = "172.17.0.1/16"
 }
-variable "role_based_access_control" {
+variable "role_based_access_control_enabled" {
   type        = bool
   description = "Whether or not RBAC is enabled on the cluster."
   default     = true
@@ -270,8 +263,8 @@ variable "private_cluster_public_fqdn_enabled" {
   default     = false
 }
 
-variable "user_assigned_identity_id" {
-  type        = string
-  description = "(Optional) Set the identity type to UserAssigned and set the ID."
+variable "identity_id" {
+  type        = list(string)
+  description = "(Optional) A list of identities to use with UserAssigned identity."
   default     = null
 }

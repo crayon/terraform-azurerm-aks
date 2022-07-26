@@ -18,42 +18,33 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # the versions kept at a certain major version.
   kubernetes_version = var.kubernetes_version == "not_set" ? data.azurerm_kubernetes_service_versions.current.latest_version : var.kubernetes_version
 
-  addon_profile {
-    kube_dashboard {
-      enabled = var.addons.kube_dashboard
-    }
+  azure_policy_enabled = var.azure_policy_enabled
 
-    azure_policy {
-      enabled = var.addons.azure_policy
-    }
-
-    oms_agent {
-      enabled                    = var.addons.oms_agent
-      log_analytics_workspace_id = var.addons.oms_agent ? var.addons.workspace_id : null
-    }
-
-    ingress_application_gateway {
-      enabled    = var.ingress_application_gateway_id != null ? true : false
-      gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
-    }
-
-    http_application_routing {
-      enabled = var.http_application_routing
-    }
-
-    azure_keyvault_secrets_provider {
-      enabled                  = var.azure_keyvault_secrets_provider.enabled
-      secret_rotation_enabled  = var.azure_keyvault_secrets_provider.secret_rotation_enabled
-      secret_rotation_interval = var.azure_keyvault_secrets_provider.secret_rotation_interval
-    }
-
-    dynamic "open_service_mesh" {
-      for_each = var.open_service_mesh != false ? ["osm"] : []
-      content {
-        enabled = var.open_service_mesh
-      }
+  dynamic "oms_agent" {
+    for_each = var.oms_agent_log_analytics_workspace_id != null ? ["oms"] : []
+    content {
+      log_analytics_workspace_id = var.oms_agent_log_analytics_workspace_id
     }
   }
+
+  dynamic "ingress_application_gateway" {
+    for_each = var.ingress_application_gateway_id != null ? ["ingress_app_gw"] : []
+    content {
+      gateway_id = var.ingress_application_gateway_id
+    }
+  }
+
+  http_application_routing_enabled = var.http_application_routing_enabled
+
+  dynamic "key_vault_secrets_provider" {
+    for_each = var.key_vault_secrets_provider.secret_rotation_enabled ? ["csi"] : []
+    content {
+      secret_rotation_enabled  = var.key_vault_secrets_provider.secret_rotation_enabled
+      secret_rotation_interval = var.key_vault_secrets_provider.secret_rotation_interval
+    }
+  }
+
+  open_service_mesh_enabled = var.open_service_mesh_enabled
 
   network_profile {
     network_plugin     = var.network_plugin
@@ -65,18 +56,17 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     pod_cidr           = var.network_plugin == "kubenet" ? var.pod_cidr : null
   }
 
-  role_based_access_control {
-    enabled = var.role_based_access_control
-    azure_active_directory {
-      managed                = var.azure_ad_managed
-      admin_group_object_ids = var.azure_ad_managed ? var.admin_groups : null
-      azure_rbac_enabled     = var.azure_rbac_enabled
+  role_based_access_control_enabled = var.role_based_access_control_enabled
 
-      # If managed is set to false, then the following properties needs to be set
-      client_app_id     = var.azure_ad_managed == false ? var.rbac_client_app_id : null
-      server_app_id     = var.azure_ad_managed == false ? var.rbac_server_app_id : null
-      server_app_secret = var.azure_ad_managed == false ? var.rbac_server_app_secret : null
-    }
+  azure_active_directory_role_based_access_control {
+    managed                = var.azure_ad_managed
+    admin_group_object_ids = var.azure_ad_managed ? var.admin_groups : null
+    azure_rbac_enabled     = var.azure_rbac_enabled
+
+    # If managed is set to false, then the following properties needs to be set
+    client_app_id     = var.azure_ad_managed == false ? var.rbac_client_app_id : null
+    server_app_id     = var.azure_ad_managed == false ? var.rbac_server_app_id : null
+    server_app_secret = var.azure_ad_managed == false ? var.rbac_server_app_secret : null
   }
 
   default_node_pool {
@@ -90,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     enable_auto_scaling = var.default_node_pool.enable_auto_scaling
     min_count           = var.default_node_pool.min_count
     max_count           = var.default_node_pool.max_count
-    availability_zones  = var.availability_zones
+    zones               = var.zones
 
     # Various additional settings
     only_critical_addons_enabled = lookup(var.default_node_pool.additional_settings, "only_critical_addons_enabled", null)
@@ -107,8 +97,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dynamic "identity" {
     for_each = var.service_principal == null ? ["noSP"] : []
     content {
-      type                      = var.user_assigned_identity_id != null ? "UserAssigned" : "SystemAssigned"
-      user_assigned_identity_id = var.user_assigned_identity_id
+      type         = var.identity_id != null ? "UserAssigned" : "SystemAssigned"
+      identity_ids = var.identity_id
     }
   }
   ## If a Service Principal is present
@@ -146,7 +136,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
   vm_size               = each.value.vm_size
   node_count            = each.value.node_count
   vnet_subnet_id        = var.subnet_id
-  availability_zones    = var.availability_zones
+  zones                 = var.zones
 
   enable_auto_scaling = each.value.enable_auto_scaling
   min_count           = each.value.min_count
