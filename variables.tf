@@ -100,7 +100,7 @@ variable "ingress_application_gateway_id" {
   type        = string
   default     = null
 }
-variable "http_application_routing" {
+variable "http_application_routing_enabled" {
   description = "(Optional) Enable HTTP application routing."
   type        = bool
   default     = false

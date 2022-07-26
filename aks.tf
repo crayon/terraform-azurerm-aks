@@ -31,9 +31,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     gateway_id = var.ingress_application_gateway_id != null ? var.ingress_application_gateway_id : null
   }
 
-  http_application_routing {
-    enabled = var.http_application_routing
-  }
+  http_application_routing_enabled = var.http_application_routing_enabled
 
   dynamic "key_vault_secrets_provider" {
     for_each = var.key_vault_secrets_provider.secret_rotation_enabled != null ? ["csi"] : []
