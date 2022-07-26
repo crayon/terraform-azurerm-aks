@@ -20,8 +20,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   azure_policy_enabled = var.azure_policy_enabled
 
-  oms_agent {
-    log_analytics_workspace_id = var.oms_agent_log_analytics_workspace_id
+  dynamic "oms_agent" {
+    for_each = var.oms_agent_log_analytics_workspace_id != null ? ["oms"] : []
+    content {
+      log_analytics_workspace_id = var.oms_agent_log_analytics_workspace_id
+    }
   }
 
   ingress_application_gateway {
