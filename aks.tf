@@ -23,8 +23,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   oms_agent {
-    enabled                    = var.addons.oms_agent
-    log_analytics_workspace_id = var.addons.oms_agent ? var.addons.workspace_id : null
+    log_analytics_workspace_id = var.oms_agent_log_analytics_workspace_id
   }
 
   ingress_application_gateway {

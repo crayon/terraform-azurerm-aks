@@ -71,16 +71,17 @@ variable "addons" {
   description = "The addon profile for the cluster"
   type = object({
     kube_dashboard = bool
-    oms_agent      = bool
-    workspace_id   = string
     azure_policy   = bool
   })
   default = {
     kube_dashboard = false
-    oms_agent      = false
-    workspace_id   = null
     azure_policy   = true
   }
+}
+variable "oms_agent_log_analytics_workspace_id" {
+  description = "Set the log analytics workspace ID you want to send your OMS Agent data to."
+  type        = string
+  default     = null
 }
 variable "key_vault_secrets_provider" {
   description = "Enable the Key Vault CSI driver."
