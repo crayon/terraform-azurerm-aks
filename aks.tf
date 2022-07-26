@@ -39,12 +39,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     }
   }
 
-  dynamic "open_service_mesh" {
-    for_each = var.open_service_mesh != false ? ["osm"] : []
-    content {
-      enabled = var.open_service_mesh
-    }
-  }
+  open_service_mesh_enabled = var.open_service_mesh_enabled
 
   network_profile {
     network_plugin     = var.network_plugin

@@ -85,8 +85,8 @@ variable "key_vault_secrets_provider" {
   })
   default = null
 }
-variable "open_service_mesh" {
-  description = "Enables the Open Service Mesh addon"
+variable "open_service_mesh_enabled" {
+  description = "(Optional) Enables the Open Service Mesh addon."
   type        = bool
   default     = false
 }
