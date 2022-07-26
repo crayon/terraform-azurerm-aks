@@ -105,6 +105,11 @@ variable "http_application_routing_enabled" {
   type        = bool
   default     = false
 }
+variable "http_application_routing_zone_name" {
+  description = "The zone name used with HTTP Application Routing."
+  type        = string
+  default     = null
+}
 variable "network_plugin" {
   type        = string
   description = "Set to kubenet by default, can be either kubenet or azure."
