@@ -82,18 +82,13 @@ variable "addons" {
     azure_policy   = true
   }
 }
-variable "azure_keyvault_secrets_provider" {
+variable "key_vault_secrets_provider" {
   description = "Enable the Key Vault CSI driver."
   type = object({
-    enabled                  = bool
     secret_rotation_enabled  = bool
     secret_rotation_interval = string
   })
-  default = {
-    enabled                  = false
-    secret_rotation_enabled  = false
-    secret_rotation_interval = null
-  }
+  default = null
 }
 variable "open_service_mesh" {
   description = "Enables the Open Service Mesh addon"
