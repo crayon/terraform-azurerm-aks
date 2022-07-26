@@ -31,7 +31,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   http_application_routing_enabled = var.http_application_routing_enabled
 
   dynamic "key_vault_secrets_provider" {
-    for_each = var.key_vault_secrets_provider.secret_rotation_enabled != null ? ["csi"] : []
+    for_each = var.key_vault_secrets_provider.secret_rotation_enabled ? ["csi"] : []
     content {
       secret_rotation_enabled  = var.key_vault_secrets_provider.secret_rotation_enabled
       secret_rotation_interval = var.key_vault_secrets_provider.secret_rotation_interval

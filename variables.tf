@@ -83,7 +83,10 @@ variable "key_vault_secrets_provider" {
     secret_rotation_enabled  = bool
     secret_rotation_interval = string
   })
-  default = null
+  default = ({
+    secret_rotation_enabled  = false
+    secret_rotation_interval = null
+  })
 }
 variable "open_service_mesh_enabled" {
   description = "(Optional) Enables the Open Service Mesh addon."
